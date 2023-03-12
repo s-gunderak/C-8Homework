@@ -17,9 +17,12 @@ int maxVal = int.Parse(Console.ReadLine());
 
 int[,] getArray = GetArray(m, n, minVal, maxVal);
 PrintArray(getArray);
-SumRow(getArray);
-int[] minSumRow = int.Parse(Console.ReadLine());
-MinSumRow(minSumRow);
+int[] sumRow = SumRow(getArray);
+Console.WriteLine(String.Join(" ", sumRow));
+// int minSumRow = int.Parse(Console.ReadLine());
+MinSumRow(sumRow);
+// int minSumRow = MinSumRow(sumRow);
+// Console.Write($"{minSumRow}");
 
 int[,] GetArray(int m, int n, int minVal, int maxVal)
 {
@@ -46,8 +49,10 @@ void PrintArray(int[,] inArray)
     }
 }
 
-void SumRow(int[,] inArray)
+int[] SumRow(int[,] inArray)
 {
+    int[] result = new int[inArray.GetLength(0)];
+    int index = 0;
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
         int sum = 0;
@@ -55,24 +60,23 @@ void SumRow(int[,] inArray)
         {
             sum += inArray[i, j];
         }
-        Console.Write($"{sum} ");
+        result[index] = sum;
+        index++;
     }
+    return result;
 }
 
 void MinSumRow(int[] inArray)
 {
-    int temp = 0;
-    for (int i = 0; i < inArray.Length; i++)
+    int min = inArray[0];
+    int index = 0;
+    for (int i = 1; i < inArray.Length; i++)
     {
-        for (int j = i + 1; j < inArray.Length; j++)
+        if (min > inArray[i])
         {
-            if (inArray[i] > inArray[j])
-            {
-                temp = inArray[i];
-                inArray[i] = inArray[j];
-                inArray[j] = temp;
-            }
-            Console.Write($"{temp}");
+            min = inArray[i];
+            index = i;
         }
     }
+    Console.Write($"Номер строки с мимнимальной суммой элементов = {index + 1}");
 }
