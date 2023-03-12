@@ -18,7 +18,7 @@ int maxVal = int.Parse(Console.ReadLine());
 int[,] getArray = GetArray(m, n, minVal, maxVal);
 PrintArray(getArray);
 SumRow(getArray);
-int minSumRow = int.Parse(Console.ReadLine());
+int[] minSumRow = int.Parse(Console.ReadLine());
 MinSumRow(minSumRow);
 
 int[,] GetArray(int m, int n, int minVal, int maxVal)
